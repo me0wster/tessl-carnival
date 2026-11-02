@@ -9,7 +9,7 @@ Review whether a game under `src/games/` follows house rules 1 to 3 in `AGENTS.m
 
 ## Scope
 
-- **Registration** (rule 1) A game lives in `src/games/<game-id>/`, its `game.ts` has its `CarnivalGame` as the default export, and its `id` is the folder name. `src/games/index.ts` finds games from that default export, so a game without one does not get a booth, and `index.ts` also rejects it when it loads.
+- **Registration** (rule 1) A game lives in `src/games/<game-id>/`, its `game.ts` has its `CarnivalGame` as the default export, and its `id` is the folder name. `src/games/index.ts` finds games from that default export, and it throws while loading if a game has no default export or its `id` differs from its folder name, which stops the whole carnival from starting.
 - **Scores** (rule 2) A game calls `recordScore(game.id, score)` from `src/carnival` once, when a round ends. It does not read or write local storage, or keep its own high score table.
 - **Theme** (rule 3) Colours, fonts and sizes come from `theme` and `canvasFont` in `src/carnival/theme.ts`. A game has no hex colours, `rgb()` or `hsl()` literals, named colours or font strings of its own.
 
@@ -25,7 +25,7 @@ For theme, read each colour, font and size passed to the canvas, including those
 
 ## Threshold
 
-Report a change under `src/games/` that breaks one of the three rules. State the consequence accurately: a game without a default export in `game.ts` gets no booth, while a game whose `id` differs from its folder name breaks the house rule but nothing breaks for the player. A game that records a score twice, or on a path that never ends a round, changes what the shared score table shows.
+Report a change under `src/games/` that breaks one of the three rules. State the consequence accurately: a game without a default export in `game.ts`, or whose `id` differs from its folder name, makes `src/games/index.ts` throw when it loads, so the carnival does not start. The registry tests catch both, so report them only when a change would slip past those tests. A game that records a score twice, or on a path that never ends a round, changes what the shared score table shows.
 
 Do not report:
 
