@@ -7,7 +7,7 @@
         "Ticket to PR"
       ],
       "agent": "claude",
-      "model": "claude-opus-5-5",
+      "model": "claude-sonnet-5-5",
       "skill": "tessl-labs/factory#implement-github-issue",
       "concurrency": {
         "keys": [
@@ -24,7 +24,7 @@
         "Ticket to PR"
       ],
       "agent": "claude",
-      "model": "claude-opus-5-5",
+      "model": "claude-sonnet-5-5",
       "skill": "tessl-labs/factory#shepherd",
       "concurrency": {
         "keys": [
